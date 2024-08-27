@@ -1,0 +1,8 @@
+<div class="mt-3">
+    {% for label, messages in app.flashes %}
+        <div class="alert alert-{{label}}">
+            {{ messages | join(', ') }}
+        </div>
+    {% endfor %}
+</div>
+

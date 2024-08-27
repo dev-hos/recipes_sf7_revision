@@ -1,0 +1,24 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title recipe.title %}
+
+{% block body %}
+<h1> {{recipe.title}} </h1>
+<div class="row">
+    <div class="col-sm-4">
+        <p> {{recipe.content}} </p>
+        <p> <em class="text-muted">durée : {{ recipe.duration }} mn</em> </p>
+        <p><em class="text-muted"> Créer le {{recipe.createdAt | date('d-m-Y à\ H:i:s')}} </em></p>
+        <p><em class="text-muted"> Modifiée le {{recipe.updatedAt | date('d-m-Y à\ H:i:s')}} </em></p>
+    </div>
+    <div class="col-sm-8">
+    {% if vich_uploader_asset(recipe, 'thumbnailFile') is null %}
+        <img src="{{asset('images/default_upload/default.jpg')}}" alt="">
+    {% else %}
+        <img src="{{vich_uploader_asset(recipe, 'thumbnailFile')| imagine_filter('carre')}}" alt="">
+    {% endif %}
+    
+    </div>  
+</div>
+   
+{% endblock %}
