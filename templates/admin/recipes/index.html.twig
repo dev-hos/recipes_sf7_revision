@@ -7,6 +7,7 @@
 {% block body %}
   <h1>Liste des recettes</h1>
   <a href="{{path('admin.recipes.create')}}" class="btn btn-primary btn-sm mb-2">Ajouter une recette</a>
+  <p>Durée total : {{total}} </p>
   <table class="table">
     <thead>
       <tr>
@@ -14,6 +15,7 @@
         <th scope="col">Slug</th>
         <th scope="col">Catégorie</th>
         <th scope="col">Durée</th>
+        <th scope="col">Date de création</th>
         <th scope="col" style="width: 200px; text-align:center;">Actions</th>
       </tr>
     </thead>
@@ -24,6 +26,7 @@
           <td> {{recipe.slug}} </td>
           <td> {{recipe.category.name}} </td>
           <td> {{recipe.duration}} </td>
+          <td> {{recipe.createdAt | date('d-m-Y à\ H:i:s')}} </td>
           <td class="d-flex gap-2">
             <a href="{{path('admin.recipes.edit', {id: recipe.id})}}" class="btn btn-warning btn-sm">Modifier</a>
             <form action="{{path('admin.recipes.delete', {id: recipe.id})}}" method="post" onclick="return confirm('Etes vous sur de supprimer la recette ?')">
