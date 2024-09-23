@@ -9,7 +9,7 @@
     <thead>
       <tr>
         <th scope="col">Nom</th>
-        <th scope="col">Slug</th>
+        <th scope="col">Total des recettes</th>
         <th scope="col" style="width: 200px; text-align:center;">Actions</th>
       </tr>
     </thead>
@@ -17,7 +17,7 @@
       {% for category in categories %}
         <tr>
           <th scope="row">{{category.name}}</th>
-          <td> {{category.slug}} </td>
+          <td> {{category.count}} </td>
           <td class="d-flex gap-2">
             <a href="{{path('admin.categories.edit', {id: category.id})}}" class="btn btn-warning btn-sm">Modifier</a>
             <form action="{{path('admin.categories.delete', {id: category.id})}}" method="post" onclick="return confirm('Etes vous sur de supprimer la recette ?')">
