@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoriesRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
@@ -14,15 +15,18 @@ class Categories
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('recipes.show')]
     private ?int $id = null;
 
     #[Assert\Length(min: 3, max: 150)]
     #[Assert\NotBlank()]
     #[ORM\Column(length: 255)]
+    #[Groups('recipes.show')]
     private ?string $name = null;
 
     #[Assert\Regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/')]
     #[ORM\Column(length: 255)]
+    #[Groups('recipes.show')]
     private ?string $slug = null;
 
     #[ORM\Column]

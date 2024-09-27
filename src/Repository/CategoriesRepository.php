@@ -20,14 +20,14 @@ class CategoriesRepository extends ServiceEntityRepository
     /**
      * @return CategoryWithCountDTO[]
      */
-    public function findAllWithCount (): array
+    public function findAllWithCount(): array
     {
         return $this->createQueryBuilder('c')
-                    ->select('NEW App\\DTO\\CategoryWithCountDTO(c.id, c.name, COUNT(c.id))')
-                    ->leftJoin('c.recipes', 'r')
-                    ->groupBy('c.id')
-                    ->getQuery()    
-                    ->getResult()
+            ->select('NEW App\\DTO\\CategoryWithCountDTO(c.id, c.name, COUNT(c.id))')
+            ->leftJoin('c.recipes', 'r')
+            ->groupBy('c.id')
+            ->getQuery()
+            ->getResult()
         ;
     }
 

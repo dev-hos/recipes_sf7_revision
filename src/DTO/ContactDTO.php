@@ -20,7 +20,7 @@ class ContactDTO
     #[Assert\NotBlank()]
     #[Assert\Email(message: 'Ceci n\'est pas une adresse email valide')]
     public string $email = '';
-    
+
     #[Assert\NotBlank()]
     #[Assert\Length(min: 5, max: 1000)]
     public string $message = '';

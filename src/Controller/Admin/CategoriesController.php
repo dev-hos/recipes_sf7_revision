@@ -18,7 +18,7 @@ class CategoriesController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(CategoriesRepository $categoriesRepository): Response
     {
-        
+
         return $this->render('admin/categories/index.html.twig', [
             'categories' => $categoriesRepository->findAllWithCount()
         ]);
@@ -32,7 +32,7 @@ class CategoriesController extends AbstractController
         $form = $this->createForm(CategoriesType::class, $category);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($category);
             $em->flush();
             $this->addFlash('success', 'La catégorie a bien été ajoutée');
@@ -51,11 +51,11 @@ class CategoriesController extends AbstractController
         $form = $this->createForm(CategoriesType::class, $categories);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             $this->addFlash('success', 'La catégorie a bien été modifiée');
             return $this->redirectToRoute('admin.categories.index');
-        }   
+        }
 
         return $this->render('admin/categories/edit.html.twig', [
             'form' => $form,

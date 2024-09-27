@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RecipesRepository;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,20 +17,24 @@ class Recipes
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('recipes.index')]
     private ?int $id = null;
 
     #[Assert\NotBlank()]
     #[Assert\Length(min: 3, max: 300)]
     #[ORM\Column(length: 255)]
+    #[Groups('recipes.index')]
     private ?string $title = null;
 
     #[Assert\Regex('/^[a-z0-9]+(?:-[a-z0-9]+)*$/')]
     #[ORM\Column(length: 255)]
+    #[Groups('recipes.index')]
     private ?string $slug = null;
 
     #[Assert\NotBlank()]
     #[Assert\Length(min: 3, max: 3000)]
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups('recipes.show')]
     private ?string $content = null;
 
     #[ORM\Column]
@@ -41,10 +46,12 @@ class Recipes
     #[Assert\NotBlank()]
     #[Assert\Positive()]
     #[ORM\Column]
+    #[Groups('recipes.index')]
     private ?int $duration = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('recipes.show')]
     private ?Categories $category = null;
 
     #[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'thumbnail')]
